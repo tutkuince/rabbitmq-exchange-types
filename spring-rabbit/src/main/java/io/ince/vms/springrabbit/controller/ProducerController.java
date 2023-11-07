@@ -25,9 +25,15 @@ public class ProducerController {
         this.directExchange = directExchange;
     }
 
-    @PostMapping("/message")
-    public String send(@RequestBody ProducerMessage producerMessage) {
+    @PostMapping("/messageA")
+    public String sendA(@RequestBody ProducerMessage producerMessage) {
         rabbitTemplate.convertAndSend(directExchange.getName(), Constants.ROUTING_A, producerMessage);
+        return "Message Sent";
+    }
+
+    @PostMapping("/messageB")
+    public String sendB(@RequestBody ProducerMessage producerMessage) {
+        rabbitTemplate.convertAndSend(directExchange.getName(), Constants.ROUTING_B, producerMessage);
         return "Message Sent";
     }
 }
